@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ApiConsentimientosV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Procedimiento">
+    <Key>
+      <PropertyRef Name="codigoCUP" />
+    </Key>
+    <Property Name="codigoCUP" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="consentimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="ApiConsentimientosV2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" />
+    <FunctionImport Name="spAgenda" ReturnType="Collection(ApiConsentimientosV2Model.spAgenda_Result)">
+      <Parameter Name="NumeroIDMedico" Mode="In" Type="Int32" />
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="Usuario" EntityType="ApiConsentimientosV2Model.Usuario" />
+    <EntitySet Name="Paciente" EntityType="ApiConsentimientosV2Model.Paciente" />
+    <EntitySet Name="ConsentimientoInformado" EntityType="ApiConsentimientosV2Model.ConsentimientoInformado" />
+  </EntityContainer>
+  <ComplexType Name="spAgenda_Result">
+    <Property Type="DateTime" Name="fecha" Nullable="true" />
+    <Property Type="Time" Name="hora" Nullable="true" />
+    <Property Type="String" Name="tipoIDMedico" Nullable="true" MaxLength="5" />
+    <Property Type="Int32" Name="numeroIDMedico" Nullable="true" />
+    <Property Type="String" Name="tipoIDPaciente" Nullable="true" MaxLength="5" />
+    <Property Type="Int32" Name="numeroIDPaciente" Nullable="true" />
+    <Property Type="String" Name="nombresPaciente" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="apellidosPaciente" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="codigoCUP" Nullable="true" />
+    <Property Type="String" Name="nombreProcedimiento" Nullable="true" MaxLength="20" />
+    <Property Type="Boolean" Name="pendiente" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="tipoId" />
+      <PropertyRef Name="numeroId" />
+    </Key>
+    <Property Name="tipoId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="numeroId" Type="Int32" Nullable="false" />
+    <Property Name="contrasena" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="admin" Type="Boolean" Nullable="false" />
+    <Property Name="nombres" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="apellidos" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="especialidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tarjetaProfesional" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="firma" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="huella" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="huellaImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Paciente">
+    <Key>
+      <PropertyRef Name="tipoId" />
+      <PropertyRef Name="numeroId" />
+    </Key>
+    <Property Name="tipoId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="numeroId" Type="Int32" Nullable="false" />
+    <Property Name="nombres" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="firma" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="huella" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="huellaImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="tipoIdTutor" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="numeroIdTutor" Type="Int32" />
+    <Property Name="nombreTutor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="parentescoTutor" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="firmaTutor" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="huellaTutor" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="huellaTutorImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ConsentimientoInformado">
+    <Key>
+      <PropertyRef Name="tipoIdPaciente" />
+      <PropertyRef Name="numeroIdPaciente" />
+      <PropertyRef Name="tipoIdProfesional" />
+      <PropertyRef Name="numeroIdProfesional" />
+      <PropertyRef Name="codigoProcedimiento" />
+    </Key>
+    <Property Name="fecha" Type="DateTime" Precision="0" />
+    <Property Name="hora" Type="Time" Precision="7" />
+    <Property Name="lugar" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tipoIdPaciente" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="numeroIdPaciente" Type="Int32" Nullable="false" />
+    <Property Name="tipoIdProfesional" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="numeroIdProfesional" Type="Int32" Nullable="false" />
+    <Property Name="codigoProcedimiento" Type="Int32" Nullable="false" />
+    <Property Name="huellaPacienteImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="firmaPaciente" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="huellaProfesionalImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="firmaProfesional" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="huellaTutorImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="firmaTutor" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="procedimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

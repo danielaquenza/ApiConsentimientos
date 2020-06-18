@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ApiConsentimientosV2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ApiConsentimientosV2.dbo.ConsentimientoInformado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="ConsentimientoInformado">
+          <Key>
+            <PropertyRef Name="tipoIdPaciente" />
+            <PropertyRef Name="numeroIdPaciente" />
+            <PropertyRef Name="tipoIdProfesional" />
+            <PropertyRef Name="numeroIdProfesional" />
+            <PropertyRef Name="codigoProcedimiento" />
+          </Key>
+          <Property Name="fecha" Type="date" />
+          <Property Name="hora" Type="time" Precision="7" />
+          <Property Name="lugar" Type="varchar" MaxLength="20" />
+          <Property Name="tipoIdPaciente" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="numeroIdPaciente" Type="int" Nullable="false" />
+          <Property Name="tipoIdProfesional" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="numeroIdProfesional" Type="int" Nullable="false" />
+          <Property Name="codigoProcedimiento" Type="int" Nullable="false" />
+          <Property Name="huellaPacienteImg" Type="varbinary(max)" />
+          <Property Name="firmaPaciente" Type="varbinary(max)" />
+          <Property Name="huellaProfesionalImg" Type="varbinary(max)" />
+          <Property Name="firmaProfesional" Type="varbinary(max)" />
+          <Property Name="huellaTutorImg" Type="varbinary(max)" />
+          <Property Name="firmaTutor" Type="varbinary(max)" />
+          <Property Name="procedimiento" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="tipoId" />
+            <PropertyRef Name="numeroId" />
+          </Key>
+          <Property Name="tipoId" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="numeroId" Type="int" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="30" />
+          <Property Name="apellidos" Type="varchar" MaxLength="30" />
+          <Property Name="firma" Type="varbinary(max)" />
+          <Property Name="huella" Type="varbinary(max)" />
+          <Property Name="huellaImg" Type="varbinary(max)" />
+          <Property Name="tipoIdTutor" Type="varchar" MaxLength="5" />
+          <Property Name="numeroIdTutor" Type="int" />
+          <Property Name="nombreTutor" Type="varchar" MaxLength="45" />
+          <Property Name="parentescoTutor" Type="varchar" MaxLength="15" />
+          <Property Name="firmaTutor" Type="varbinary(max)" />
+          <Property Name="huellaTutor" Type="varbinary(max)" />
+          <Property Name="huellaTutorImg" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Procedimiento">
+          <Key>
+            <PropertyRef Name="codigoCUP" />
+          </Key>
+          <Property Name="codigoCUP" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="45" />
+          <Property Name="consentimiento" Type="text" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="tipoId" />
+            <PropertyRef Name="numeroId" />
+          </Key>
+          <Property Name="tipoId" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="numeroId" Type="int" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="admin" Type="bit" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="apellidos" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="especialidad" Type="varchar" MaxLength="20" />
+          <Property Name="tarjetaProfesional" Type="varchar" MaxLength="15" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+          <Property Name="firma" Type="varbinary(max)" />
+          <Property Name="huella" Type="varbinary(max)" />
+          <Property Name="huellaImg" Type="varbinary(max)" />
+        </EntityType>
+        <Function Name="spAgenda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroIDMedico" Type="int" Mode="In" />
+          <Parameter Name="Fecha" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="ApiConsentimientosV2ModelStoreContainer">
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsentimientoInformado" EntityType="Self.ConsentimientoInformado" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ConsentimientoInformado].[fecha] AS [fecha], 
+    [ConsentimientoInformado].[hora] AS [hora], 
+    [ConsentimientoInformado].[lugar] AS [lugar], 
+    [ConsentimientoInformado].[tipoIdPaciente] AS [tipoIdPaciente], 
+    [ConsentimientoInformado].[numeroIdPaciente] AS [numeroIdPaciente], 
+    [ConsentimientoInformado].[tipoIdProfesional] AS [tipoIdProfesional], 
+    [ConsentimientoInformado].[numeroIdProfesional] AS [numeroIdProfesional], 
+    [ConsentimientoInformado].[codigoProcedimiento] AS [codigoProcedimiento], 
+    [ConsentimientoInformado].[huellaPacienteImg] AS [huellaPacienteImg], 
+    [ConsentimientoInformado].[firmaPaciente] AS [firmaPaciente], 
+    [ConsentimientoInformado].[huellaProfesionalImg] AS [huellaProfesionalImg], 
+    [ConsentimientoInformado].[firmaProfesional] AS [firmaProfesional], 
+    [ConsentimientoInformado].[huellaTutorImg] AS [huellaTutorImg], 
+    [ConsentimientoInformado].[firmaTutor] AS [firmaTutor], 
+    [ConsentimientoInformado].[procedimiento] AS [procedimiento]
+    FROM [dbo].[ConsentimientoInformado] AS [ConsentimientoInformado]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ApiConsentimientosV2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Procedimiento">
+          <Key>
+            <PropertyRef Name="codigoCUP" />
+          </Key>
+          <Property Name="codigoCUP" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="consentimiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="ApiConsentimientosV2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Procedimiento" EntityType="Self.Procedimiento" />
+          <FunctionImport Name="spAgenda" ReturnType="Collection(ApiConsentimientosV2Model.spAgenda_Result)">
+            <Parameter Name="NumeroIDMedico" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="Usuario" EntityType="ApiConsentimientosV2Model.Usuario" />
+          <EntitySet Name="Paciente" EntityType="ApiConsentimientosV2Model.Paciente" />
+          <EntitySet Name="ConsentimientoInformado" EntityType="ApiConsentimientosV2Model.ConsentimientoInformado" />
+        </EntityContainer>
+        <ComplexType Name="spAgenda_Result">
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+          <Property Type="Time" Name="hora" Nullable="true" />
+          <Property Type="String" Name="tipoIDMedico" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="numeroIDMedico" Nullable="true" />
+          <Property Type="String" Name="tipoIDPaciente" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="numeroIDPaciente" Nullable="true" />
+          <Property Type="String" Name="nombresPaciente" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="apellidosPaciente" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="codigoCUP" Nullable="true" />
+          <Property Type="String" Name="nombreProcedimiento" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="pendiente" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="tipoId" />
+            <PropertyRef Name="numeroId" />
+          </Key>
+          <Property Name="tipoId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="numeroId" Type="Int32" Nullable="false" />
+          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="admin" Type="Boolean" Nullable="false" />
+          <Property Name="nombres" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="especialidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tarjetaProfesional" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="firma" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="huella" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="huellaImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="tipoId" />
+            <PropertyRef Name="numeroId" />
+          </Key>
+          <Property Name="tipoId" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="numeroId" Type="Int32" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="firma" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="huella" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="huellaImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="tipoIdTutor" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="numeroIdTutor" Type="Int32" />
+          <Property Name="nombreTutor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="parentescoTutor" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="firmaTutor" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="huellaTutor" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="huellaTutorImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ConsentimientoInformado">
+          <Key>
+            <PropertyRef Name="tipoIdPaciente" />
+            <PropertyRef Name="numeroIdPaciente" />
+            <PropertyRef Name="tipoIdProfesional" />
+            <PropertyRef Name="numeroIdProfesional" />
+            <PropertyRef Name="codigoProcedimiento" />
+          </Key>
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="hora" Type="Time" Precision="7" />
+          <Property Name="lugar" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tipoIdPaciente" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="numeroIdPaciente" Type="Int32" Nullable="false" />
+          <Property Name="tipoIdProfesional" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="numeroIdProfesional" Type="Int32" Nullable="false" />
+          <Property Name="codigoProcedimiento" Type="Int32" Nullable="false" />
+          <Property Name="huellaPacienteImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="firmaPaciente" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="huellaProfesionalImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="firmaProfesional" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="huellaTutorImg" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="firmaTutor" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="procedimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ApiConsentimientosV2ModelStoreContainer" CdmEntityContainer="ApiConsentimientosV2Entities">
+          <EntitySetMapping Name="Procedimiento">
+            <EntityTypeMapping TypeName="ApiConsentimientosV2Model.Procedimiento">
+              <MappingFragment StoreEntitySet="Procedimiento">
+                <ScalarProperty Name="codigoCUP" ColumnName="codigoCUP" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="consentimiento" ColumnName="consentimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spAgenda" FunctionName="ApiConsentimientosV2Model.Store.spAgenda">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ApiConsentimientosV2Model.spAgenda_Result">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="tipoIDMedico" ColumnName="tipoIDMedico" />
+                <ScalarProperty Name="numeroIDMedico" ColumnName="numeroIDMedico" />
+                <ScalarProperty Name="tipoIDPaciente" ColumnName="tipoIDPaciente" />
+                <ScalarProperty Name="numeroIDPaciente" ColumnName="numeroIDPaciente" />
+                <ScalarProperty Name="nombresPaciente" ColumnName="nombresPaciente" />
+                <ScalarProperty Name="apellidosPaciente" ColumnName="apellidosPaciente" />
+                <ScalarProperty Name="codigoCUP" ColumnName="codigoCUP" />
+                <ScalarProperty Name="nombreProcedimiento" ColumnName="nombreProcedimiento" />
+                <ScalarProperty Name="pendiente" ColumnName="pendiente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="ApiConsentimientosV2Model.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="huellaImg" ColumnName="huellaImg" />
+                <ScalarProperty Name="huella" ColumnName="huella" />
+                <ScalarProperty Name="firma" ColumnName="firma" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tarjetaProfesional" ColumnName="tarjetaProfesional" />
+                <ScalarProperty Name="especialidad" ColumnName="especialidad" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="numeroId" ColumnName="numeroId" />
+                <ScalarProperty Name="tipoId" ColumnName="tipoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paciente">
+            <EntityTypeMapping TypeName="ApiConsentimientosV2Model.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="huellaTutorImg" ColumnName="huellaTutorImg" />
+                <ScalarProperty Name="huellaTutor" ColumnName="huellaTutor" />
+                <ScalarProperty Name="firmaTutor" ColumnName="firmaTutor" />
+                <ScalarProperty Name="parentescoTutor" ColumnName="parentescoTutor" />
+                <ScalarProperty Name="nombreTutor" ColumnName="nombreTutor" />
+                <ScalarProperty Name="numeroIdTutor" ColumnName="numeroIdTutor" />
+                <ScalarProperty Name="tipoIdTutor" ColumnName="tipoIdTutor" />
+                <ScalarProperty Name="huellaImg" ColumnName="huellaImg" />
+                <ScalarProperty Name="huella" ColumnName="huella" />
+                <ScalarProperty Name="firma" ColumnName="firma" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="numeroId" ColumnName="numeroId" />
+                <ScalarProperty Name="tipoId" ColumnName="tipoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsentimientoInformado">
+            <EntityTypeMapping TypeName="ApiConsentimientosV2Model.ConsentimientoInformado">
+              <MappingFragment StoreEntitySet="ConsentimientoInformado">
+                <ScalarProperty Name="procedimiento" ColumnName="procedimiento" />
+                <ScalarProperty Name="firmaTutor" ColumnName="firmaTutor" />
+                <ScalarProperty Name="huellaTutorImg" ColumnName="huellaTutorImg" />
+                <ScalarProperty Name="firmaProfesional" ColumnName="firmaProfesional" />
+                <ScalarProperty Name="huellaProfesionalImg" ColumnName="huellaProfesionalImg" />
+                <ScalarProperty Name="firmaPaciente" ColumnName="firmaPaciente" />
+                <ScalarProperty Name="huellaPacienteImg" ColumnName="huellaPacienteImg" />
+                <ScalarProperty Name="codigoProcedimiento" ColumnName="codigoProcedimiento" />
+                <ScalarProperty Name="numeroIdProfesional" ColumnName="numeroIdProfesional" />
+                <ScalarProperty Name="tipoIdProfesional" ColumnName="tipoIdProfesional" />
+                <ScalarProperty Name="numeroIdPaciente" ColumnName="numeroIdPaciente" />
+                <ScalarProperty Name="tipoIdPaciente" ColumnName="tipoIdPaciente" />
+                <ScalarProperty Name="lugar" ColumnName="lugar" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

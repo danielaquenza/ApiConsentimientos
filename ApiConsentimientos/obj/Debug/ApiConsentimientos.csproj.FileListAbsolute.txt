@@ -1,0 +1,11 @@
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\bin\Debug\ApiConsentimientos.dll
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\bin\Debug\ApiConsentimientos.pdb
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\obj\Debug\ApiConsentimientos.dll
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\obj\Debug\ApiConsentimientos.pdb
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\bin\Debug\ApiConsentimientos.dll.config
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\bin\Debug\EntityFramework.dll
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\bin\Debug\EntityFramework.SqlServer.dll
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\bin\Debug\EntityFramework.xml
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\bin\Debug\EntityFramework.SqlServer.xml
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\obj\Debug\ApiConsentimientos.csproj.CopyComplete
+D:\Proyectos C#\Consentimientos Informados Medytec\Version 02\ApiConsentimientos\ApiConsentimientos\obj\Debug\ApiConsentimientos.csprojAssemblyReference.cache

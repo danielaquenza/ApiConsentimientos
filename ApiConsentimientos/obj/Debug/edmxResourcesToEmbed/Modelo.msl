@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ApiConsentimientosV2ModelStoreContainer" CdmEntityContainer="ApiConsentimientosV2Entities">
+    <EntitySetMapping Name="Procedimiento">
+      <EntityTypeMapping TypeName="ApiConsentimientosV2Model.Procedimiento">
+        <MappingFragment StoreEntitySet="Procedimiento">
+          <ScalarProperty Name="codigoCUP" ColumnName="codigoCUP" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="consentimiento" ColumnName="consentimiento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spAgenda" FunctionName="ApiConsentimientosV2Model.Store.spAgenda">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ApiConsentimientosV2Model.spAgenda_Result">
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="hora" ColumnName="hora" />
+          <ScalarProperty Name="tipoIDMedico" ColumnName="tipoIDMedico" />
+          <ScalarProperty Name="numeroIDMedico" ColumnName="numeroIDMedico" />
+          <ScalarProperty Name="tipoIDPaciente" ColumnName="tipoIDPaciente" />
+          <ScalarProperty Name="numeroIDPaciente" ColumnName="numeroIDPaciente" />
+          <ScalarProperty Name="nombresPaciente" ColumnName="nombresPaciente" />
+          <ScalarProperty Name="apellidosPaciente" ColumnName="apellidosPaciente" />
+          <ScalarProperty Name="codigoCUP" ColumnName="codigoCUP" />
+          <ScalarProperty Name="nombreProcedimiento" ColumnName="nombreProcedimiento" />
+          <ScalarProperty Name="pendiente" ColumnName="pendiente" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="ApiConsentimientosV2Model.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="huellaImg" ColumnName="huellaImg" />
+          <ScalarProperty Name="huella" ColumnName="huella" />
+          <ScalarProperty Name="firma" ColumnName="firma" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="tarjetaProfesional" ColumnName="tarjetaProfesional" />
+          <ScalarProperty Name="especialidad" ColumnName="especialidad" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="admin" ColumnName="admin" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="numeroId" ColumnName="numeroId" />
+          <ScalarProperty Name="tipoId" ColumnName="tipoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paciente">
+      <EntityTypeMapping TypeName="ApiConsentimientosV2Model.Paciente">
+        <MappingFragment StoreEntitySet="Paciente">
+          <ScalarProperty Name="huellaTutorImg" ColumnName="huellaTutorImg" />
+          <ScalarProperty Name="huellaTutor" ColumnName="huellaTutor" />
+          <ScalarProperty Name="firmaTutor" ColumnName="firmaTutor" />
+          <ScalarProperty Name="parentescoTutor" ColumnName="parentescoTutor" />
+          <ScalarProperty Name="nombreTutor" ColumnName="nombreTutor" />
+          <ScalarProperty Name="numeroIdTutor" ColumnName="numeroIdTutor" />
+          <ScalarProperty Name="tipoIdTutor" ColumnName="tipoIdTutor" />
+          <ScalarProperty Name="huellaImg" ColumnName="huellaImg" />
+          <ScalarProperty Name="huella" ColumnName="huella" />
+          <ScalarProperty Name="firma" ColumnName="firma" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="numeroId" ColumnName="numeroId" />
+          <ScalarProperty Name="tipoId" ColumnName="tipoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConsentimientoInformado">
+      <EntityTypeMapping TypeName="ApiConsentimientosV2Model.ConsentimientoInformado">
+        <MappingFragment StoreEntitySet="ConsentimientoInformado">
+          <ScalarProperty Name="procedimiento" ColumnName="procedimiento" />
+          <ScalarProperty Name="firmaTutor" ColumnName="firmaTutor" />
+          <ScalarProperty Name="huellaTutorImg" ColumnName="huellaTutorImg" />
+          <ScalarProperty Name="firmaProfesional" ColumnName="firmaProfesional" />
+          <ScalarProperty Name="huellaProfesionalImg" ColumnName="huellaProfesionalImg" />
+          <ScalarProperty Name="firmaPaciente" ColumnName="firmaPaciente" />
+          <ScalarProperty Name="huellaPacienteImg" ColumnName="huellaPacienteImg" />
+          <ScalarProperty Name="codigoProcedimiento" ColumnName="codigoProcedimiento" />
+          <ScalarProperty Name="numeroIdProfesional" ColumnName="numeroIdProfesional" />
+          <ScalarProperty Name="tipoIdProfesional" ColumnName="tipoIdProfesional" />
+          <ScalarProperty Name="numeroIdPaciente" ColumnName="numeroIdPaciente" />
+          <ScalarProperty Name="tipoIdPaciente" ColumnName="tipoIdPaciente" />
+          <ScalarProperty Name="lugar" ColumnName="lugar" />
+          <ScalarProperty Name="hora" ColumnName="hora" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
